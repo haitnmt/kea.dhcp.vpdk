@@ -1,0 +1,188 @@
+{
+  "Dhcp4": {
+    "interfaces-config": {
+      "interfaces": [ "eth0" ]
+    },
+    "hooks-libraries": [
+      {
+        "library": "/usr/lib/x86_64-linux-gnu/kea/hooks/libdhcp_bootp.so"
+      },
+      {
+        "library": "/usr/lib/x86_64-linux-gnu/kea/hooks/libdhcp_stat_cmds.so"
+      },
+      {
+        "library": "/usr/lib/x86_64-linux-gnu/kea/hooks/libdhcp_lease_cmds.so"
+      },
+      {
+        "library": "/usr/lib/x86_64-linux-gnu/kea/hooks/libdhcp_pgsql_cb.so"
+      }
+    ],
+
+    "control-socket": {
+      "socket-type": "unix",
+      "socket-name": "/tmp/kea4-ctrl-socket"
+    },
+
+    "lease-database": {
+      "on-fail": "serve-retry-continue",
+      "type": "postgresql",
+      "name": "dhcp",
+      "user": "postgres",
+      "password": "Qm2W^N%xbuTQvz72DWpW5DG9@z",
+      "host": "192.168.9.6",
+      "port": 5432
+    },
+
+    "hosts-database": {
+      "on-fail": "serve-retry-continue",
+      "type": "postgresql",
+      "name": "dhcp",
+      "user": "postgres",
+      "password": "Qm2W^N%xbuTQvz72DWpW5DG9@z",
+      "host": "192.168.9.6",
+      "port": 5432
+    },
+
+    "renew-timer": 15840,
+    "rebind-timer": 27720,
+    "valid-lifetime": 31680,
+
+    "option-data": [
+      {
+        "name": "domain-name-servers",
+        "data": "192.168.9.253, 192.168.9.3"
+      },
+
+      {
+        "name": "domain-search",
+        "data": "vpdk.stnmt.bacninh.gov.vn"
+      }
+    ],
+
+    "subnet4": [
+      {
+        "subnet": "172.28.0.0/16",
+        "pools": [ { "pool": "172.28.136.0 - 172.28.252.252" } ],
+        "option-data": [
+          {
+            "name": "routers",
+            "data": "172.28.0.1"
+          }
+        ],
+        "reservations": [
+          // MAC address reservation
+          {
+            "hw-address": "54:BF:64:8F:48:22",
+            "ip-address": "172.28.28.28",
+            "hostname": "dell-haihv"
+          },
+          {
+            "hw-address": "00:14:FD:16:9F:57",
+            "ip-address": "172.28.1.9",
+            "hostname": "data"
+          }
+          // client-id reservation
+          //{
+          //"client-id": "01:00:0c:29:4c:26:8a",
+          //"ip-address": "172.16.21.31",
+          //"hostname": "pop-os"
+          //}
+        ]
+      },
+      //Add subnets here
+      {
+        "subnet": "192.168.9.0/24",
+        "pools": [ { "pool": "192.168.9.100 - 192.168.9.199" } ],
+        "option-data": [
+          {
+            "name": "routers",
+            "data": "192.168.9.1"
+          }
+        ],
+        "reservations": [
+          // MAC address reservation
+          {
+            "hw-address": "BC:24:11:0F:F8:F2",
+            "ip-address": "192.168.9.6",
+            "hostname": "PostgreSQL"
+          },
+          {
+            "hw-address": "00:15:5D:0A:94:06",
+            "ip-address": "192.168.9.8",
+            "hostname": "welis"
+          },
+          {
+            "hw-address": "00:E0:D8:19:0D:75",
+            "ip-address": "192.168.9.10",
+            "hostname": "UPS"
+          }
+        ]
+      },
+      {
+        "subnet": "192.168.10.0/24",
+        "pools": [ { "pool": "192.168.10.100 - 192.168.10.199" } ],
+        "option-data": [
+          {
+            "name": "routers",
+            "data": "192.168.10.254"
+          }
+        ],
+        // Add reservations here
+        "reservations": [
+          // MAC address reservation
+          {
+            "hw-address": "40:F2:E9:95:36:DA",
+            "ip-address": "192.168.10.22",
+            "hostname": "KOICA-LIS-APP"
+          },
+          {
+            "hw-address": "98:BE:94:2A:EB:0B",
+            "ip-address": "192.168.10.1",
+            "hostname": "SVR1"
+          },
+          {
+            "hw-address": "98:BE:94:2A:FD:B2",
+            "ip-address": "192.168.10.2",
+            "hostname": "SVR2"
+          },
+          {
+            "hw-address": "14:91:82:FB:90:CF",
+            "ip-address": "192.168.10.51",
+            "hostname": "W311"
+          },
+          {
+            "hw-address": "14:91:82:FB:91:14",
+            "ip-address": "192.168.10.52",
+            "hostname": "W311"
+          },
+          {
+            "hw-address": "68:CA:E4:F2:BF:EF",
+            "ip-address": "192.168.10.60",
+            "hostname": "SW-08-WAN1"
+          },
+          {
+            "hw-address": "68:CA:E4:F2:B9:FB",
+            "ip-address": "192.168.10.61",
+            "hostname": "SW-08-WAN2"
+          },
+          {
+            "hw-address": "14:91:82:FB:90:CC",
+            "ip-address": "192.168.10.53",
+            "hostname": "WT11"
+          },
+          {
+            "hw-address": "14:91:82:FB:90:E1",
+            "ip-address": "192.168.10.54",
+            "hostname": "WHT"
+          },
+          // client-id reservation
+          {
+            "client-id": "b2:44:db:91:00:02:00:00:ab:11:9e:28:95:4e:f5:cc:ea:d0",
+            "ip-address": "192.168.10.11",
+            "hostname": "unifi"
+          }
+        ]
+      }
+    ]
+  }
+}
